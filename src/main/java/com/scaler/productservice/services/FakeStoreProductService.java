@@ -11,5 +11,14 @@ public class FakeStoreProductService implements ProductSerivce {
         this.restTemplate = restTemplate;
     }
 
+    // This method will fetch products from the Fake Store API
+    // and return them as a list of Product objects
+     @Override
+     public List<Product> getAllProducts() {
+         String url = "https://fakestoreapi.com/products";
+         ResponseEntity<Product[]> response = restTemplate.getForEntity(url, Product[].class);
 
+         Product[] products = response.getBody();
+         return Arrays.asList(products);
+     }
 }
