@@ -1,24 +1,36 @@
 package com.scaler.productservice.controllers;
 
-import com.scaler.productservice.services.ProductSerivce;
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.scaler.productservice.exceptions.InvalidProductIdException;
+import com.scaler.productservice.models.Product;
+import com.scaler.productservice.services.ProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/api/v1/products")
 public class ProductController {
-    // This class will handle HTTP requests related to products
-    // It will use the ProductService to perform operations on products
 
-    // Example method to get all products
-    // @GetMapping("/products")
-    // public List<Product> getAllProducts() {
-    //     return productService.getAllProducts();
-    // }
+     @GetMapping("/products")
+     public ResponseEntity<Page<Product>> getAllProducts(
+             @RequestParam(defaultValue = "0") int pageNumber,
+             @RequestParam(defaultValue = "10") int pageSize,
+             @RequestParam(defaultValue = "asc") String sortDir) {
+         return ResponseEntity.ok(productService.getAllProducts(pageNumber, pageSize, sortDir));
+     }
 
-    // Example method to create a new product
-    // @PostMapping("/products")
-    // public Product createProduct(@RequestBody Product product) {
-    //     return productService.createProduct(product);
-    // }
+     @PostMapping("/products")
+     public Product createProduct(@RequestBody Product product) {
+         return productService.createProduct(product);
+     }
 
-    private ProductSerivce productService;
+    private ProductService productService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+     @GetMapping("/products/{id}")
+     public Product getProductById(@PathVariable Long id) throws InvalidProductIdException {
+         return productService.getProductById(id);
+     }
 }
