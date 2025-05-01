@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@MappedSuperclass
+//@MappedSuperclass
 public class Product extends BaseModel {
     private String title;
     private String description;

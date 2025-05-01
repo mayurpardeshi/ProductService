@@ -11,11 +11,11 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@MappedSuperclass
+//@MappedSuperclass
 public class BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String createdAt;
     private String updatedAt;

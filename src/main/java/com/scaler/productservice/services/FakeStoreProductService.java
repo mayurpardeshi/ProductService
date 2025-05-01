@@ -13,9 +13,18 @@ import java.util.List;
 
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
+    private RestTemplate restTemplate = null;
     @Override
     public Product getProductById(Long id) throws InvalidProductIdException {
-        return null;
+        restTemplate = new RestTemplate();
+        String url = "https://fakestoreapi.com/products/" + id;
+        ResponseEntity<Product> response = restTemplate.getForEntity(url, Product.class);
+        if (response.getStatusCode() == HttpStatus.OK) {
+            return response.getBody();
+        } else {
+            throw new InvalidProductIdException(id, "Product not found");
+        }
+//        return null;
     }
 
     @Override
