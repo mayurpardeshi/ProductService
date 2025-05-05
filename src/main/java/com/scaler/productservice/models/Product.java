@@ -1,7 +1,5 @@
 package com.scaler.productservice.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +11,6 @@ public class Product extends BaseModel {
     private String description;
     private double price;
     private String image;
-
+    private Category category;
 
 }

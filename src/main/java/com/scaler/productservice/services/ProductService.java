@@ -1,15 +1,13 @@
 package com.scaler.productservice.services;
 
-import com.scaler.productservice.exceptions.InvalidProductIdException;
 import com.scaler.productservice.models.Product;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface ProductService {
     Product getProductById(Long id);
 
-    Page<Product> getAllProducts(int pageNumber, int pageSize, String sortDir);
+    List<Product> getAllProducts();
 
     Product updateProduct(Long id, Product product);
 
